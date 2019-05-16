@@ -112,7 +112,8 @@ class SessionTests(unittest.TestCase):
         cart = session.get_cart_contents(self.db)
 
         self.assertEqual(1, len(cart))
-        self.assertEqual(product['id'], cart[0]['id'])
+        # compare ids as strings to be as flexible as possible
+        self.assertEqual(str(product['id']), str(cart[0]['id']))
         self.assertEqual(quantity, cart[0]['quantity'])
 
         # now add again to the cart, check that we still have one item and the

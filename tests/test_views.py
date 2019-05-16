@@ -197,7 +197,8 @@ class FunctionalTests(unittest.TestCase):
         cart = session.get_cart_contents(self.db)
 
         self.assertEqual(1, len(cart))
-        self.assertEqual(str(product['id']), cart[0]['id'])
+        # compare ids as strings to be as flexible as possible
+        self.assertEqual(str(product['id']), str(cart[0]['id']))
         self.assertEqual(2, cart[0]['quantity'])
 
     def test_cart_page(self):
