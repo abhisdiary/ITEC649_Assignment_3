@@ -118,22 +118,13 @@ class SessionTests(unittest.TestCase):
 
         # now add again to the cart, check that we still have one item and the
         # quantity is doubled
-        session.add_to_cart(self.db, product['id'], quantity, update=False)
+        session.add_to_cart(self.db, product['id'], quantity)
         cart = session.get_cart_contents(self.db)
 
         self.assertEqual(1, len(cart))
         self.assertEqual(product['id'], cart[0]['id'])
         self.assertEqual(quantity*2, cart[0]['quantity'])
 
-
-        # now add again but with the update flag set, this should
-        # set the quantity rather than adding to it
-        session.add_to_cart(self.db, product['id'], quantity, update=True)
-        cart = session.get_cart_contents(self.db)
-
-        self.assertEqual(1, len(cart))
-        self.assertEqual(product['id'], cart[0]['id'])
-        self.assertEqual(quantity, cart[0]['quantity'])
 
 
 
