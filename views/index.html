@@ -1,5 +1,27 @@
 % rebase('base.html')
 
-<h1>{{title}}</h1>
+<table>
+            <tr>
+                <th><h1>{{title}}</h1></th>
+            </tr>
+        </table>
 
-<p>Your content goes here...</p>
+<div class="productlist">
+    % if product_list:
+    % for product in product_list:
+    <div class="product">
+        <h2><a href="/product/{{!product['id']}}">{{!product['name']}}</a></h2>
+            <div class="image"><img alt="{{!product['name']}}" src="{{!product['image_url']}}"></div>
+            <div class="inventory">{{!product['inventory']}} in stock</div>
+            <div class="cost">${{!product['unit_cost']}}</div>
+            <div class="cart">
+                <form action="/cart" method=POST>
+                    <input name="quantity" type="number" value="1" min="0">
+                    <input name="product" type="hidden" value="{{!product['id']}}">
+                    <input type="submit" value="Add to Cart">
+                </form>
+            </div>
+    </div>
+    % end
+    % end
+</div>

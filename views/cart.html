@@ -1,0 +1,51 @@
+% rebase('base.html')
+
+<h1>{{title}}</h1>
+
+<div>
+    <div style="overflow-x:auto;">
+        <table>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Price Per Unit</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+            % cart_total_cost = 0
+            % if product_list:
+            % for product in product_list:
+            <tr>
+                % if product['quantity'] is not 0 or '':
+                <td>{{!product['id']}}</td>
+                <td>{{!product['name']}}</td>
+                <td>{{!product['cost']}}</td>
+                % total_cost = round((float(product['quantity']) * float(product['cost'])),2)
+                % cart_total_cost = round((cart_total_cost + total_cost), 2)
+                <td>{{!product['quantity']}}</td>
+                <td>{{!total_cost}}</td>
+                % else:
+                <td></td>
+                <td></td>
+                <td>Cart is Empty</td>
+                <td></td>
+                <td></td>
+                % end
+            </tr>
+            %end
+            %end
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                % if cart_total_cost != 0:
+                <th>Total Cost to Pay:</th>
+                <th>{{!cart_total_cost}}</th>
+                % else:
+                <td></td>
+                <td></td>
+                % end
+            </tr>
+        </table>
+    </div>
+</div>
